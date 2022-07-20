@@ -7,6 +7,12 @@ const morgan = require('morgan')
 
 app.use(express.static(path.join(__dirname,'public')))
 
+//using middleware to handle html form-data
+app.use(express.urlencoded())
+
+//using middleware to handle json data
+app.use(express.json())
+
 //HTTP logger
 app.use(morgan('combined'))
 
@@ -24,6 +30,11 @@ app.get('/news', (req, res) => {
 })
 
 app.get('/search', (req, res) => {
+  res.render('search');
+})
+
+app.post('/search', (req, res) => {
+  console.log(req.body)
   res.render('search');
 })
 
